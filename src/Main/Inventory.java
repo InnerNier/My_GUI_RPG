@@ -4,12 +4,11 @@ public class Inventory
 {
 	int Potions;
 	int Smoke_Bombs;
-	int Bombs;
+	
 	public Inventory() 
 	{
 		Potions = 3;
 		Smoke_Bombs = 3;
-		Bombs = 3;
 	}
 	public boolean Use_Potion()
 	{
@@ -27,12 +26,5 @@ public class Inventory
 	{
 		Smoke_Bombs++;
 	}
-	public boolean Use_Bomb()
-	{
-		return false;
-	}
-	public void Gain_Bomb()
-	{
-		Bombs++;
-	}
+
 }
