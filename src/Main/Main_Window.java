@@ -15,20 +15,16 @@ public class Main_Window
 	JLabel Next_Label = new JLabel();
 	JButton Next_Button = new JButton("Next");
 	
-	JPanel Battle_Panel = new JPanel();
-	JLabel Battle_Label = new JLabel();
-	JButton Attack_Button = new JButton("Attack");
-	JButton Magic_Button = new JButton("Magic");
-	JButton Potion_Button = new JButton("Potion");
-	JButton Smoke_Bomb_Button = new JButton("Smoke Bomb");
-	
-	JPanel Battle_Log_Panel = new JPanel();
-	JLabel Battle_Log_Label = new JLabel();
+	JPanel Options_Panel = new JPanel();
+	JLabel Options_Label = new JLabel();
+	JButton First_Button = new JButton("Default 1");
+	JButton Second_Button = new JButton("Default 2");
+	JButton Third_Button = new JButton("Default 3");
 	
 	public Main_Window()
 	{
 		//Frame Set up
-		Main_Window = new JFrame("Simple GUI RPG");
+		Main_Window = new JFrame("Simple Visual Novel");
 		Main_Window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Main_Window.setSize(800, 600);
 		Main_Window.setLayout(new BorderLayout());
@@ -47,40 +43,27 @@ public class Main_Window
 		
 		
 		
-		//Battle Action Page Specification
-		Battle_Panel.setLayout(new BoxLayout(Battle_Panel, BoxLayout.Y_AXIS));
-		Battle_Label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Attack_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Magic_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Potion_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Smoke_Bomb_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//Options Page Specification
+		Options_Panel.setLayout(new BoxLayout(Options_Panel, BoxLayout.Y_AXIS));
+		Options_Label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        First_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Second_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Third_Button.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        Battle_Panel.add(Box.createRigidArea(new Dimension(0, 100)));
-        Battle_Panel.add(Battle_Label);
-        Battle_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        Battle_Panel.add(Attack_Button);
-        Battle_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        Battle_Panel.add(Magic_Button);
-        Battle_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        Battle_Panel.add(Potion_Button);
-        Battle_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        Battle_Panel.add(Smoke_Bomb_Button);
+        Options_Panel.add(Box.createRigidArea(new Dimension(0, 100)));
+        Options_Panel.add(Options_Label);
+        Options_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        Options_Panel.add(First_Button);
+        Options_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        Options_Panel.add(Second_Button);
+        Options_Panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        Options_Panel.add(Third_Button);
         
-        
-        
-        //Battle Log Page Specification
-        Battle_Log_Panel.setLayout(new BoxLayout(Battle_Log_Panel, BoxLayout.Y_AXIS));
-		Battle_Log_Label.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		Battle_Log_Panel.add(Box.createRigidArea(new Dimension(0, 100)));
-        Battle_Log_Panel.add(Battle_Log_Label);
-        
-        
+
         
         //Add Panels to card layout and add to Frame
         cardPanel.add(Next_Panel, "NEXT_SCREEN");
-        cardPanel.add(Battle_Panel, "BATTLE_SCREEN");
-        cardPanel.add(Battle_Log_Panel, "Log_SCREEN");
+        cardPanel.add(Options_Panel, "OPTIONS_SCREEN");
         
         Main_Window.add(cardPanel);
 		
@@ -90,6 +73,8 @@ public class Main_Window
 		Set_Next_Text("Welcome to the Game");
 		Set_Next_Background(Color.BLACK);
 		Show_Screen("NEXT_SCREEN");
+		
+		Set_Option_Background(Color.BLACK);
      
 		
 		
@@ -114,26 +99,20 @@ public class Main_Window
 	}
 	
 	//Battle Action Page functions
-	public void Set_Battle_Background(Color color)
+	public void Set_Option_Background(Color color)
 	{
-		Battle_Panel.setBackground(color);
+		Options_Panel.setBackground(color);
 	}
-	public void Set_Battle_Text(String text)
+	public void Set_Option_Text(String text)
 	{
-		Battle_Label.setFont(gameFont);
-		Battle_Label.setForeground(Color.WHITE);
-		Battle_Label.setText(text);
+		Options_Label.setFont(gameFont);
+		Options_Label.setForeground(Color.WHITE);
+		Options_Label.setText(text);
 	}
-	
-	//Battle Log Page functions
-	public void Set_Battle_Log_Background(Color color)
+	public void Set_Option_Button_Names(String option1, String option2, String option3)
 	{
-		Battle_Log_Panel.setBackground(color);
-	}
-	public void Set_Battle_Log_Text(String text)
-	{
-		Battle_Log_Label.setFont(gameFont);
-		Battle_Log_Label.setForeground(Color.WHITE);
-		Battle_Log_Label.setText(text);
+		First_Button.setText(option1);
+		Second_Button.setText(option2);
+		Third_Button.setText(option3);
 	}
 }
