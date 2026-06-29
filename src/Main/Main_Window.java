@@ -70,7 +70,6 @@ public class Main_Window
         
         
 		//Initial Panel
-		Set_Next_Text("Welcome to the Game");
 		Set_Next_Background(Color.BLACK);
 		Show_Screen("NEXT_SCREEN");
 		

@@ -1,13 +1,25 @@
 package Main;
 
-import java.awt.Color;
 import java.awt.event.*;
+
+import javax.swing.JButton;
 
 public class Story_Script 
 {
-	final String[] Segment_1_Dialogue = {"I'm so mad", "So afraid", "Why me of all people?", "I understand one of us has to go", "But why me?", "Every year one of has to go", "and give up a body part to a terrible spirit", "They say those who give up something important...", "Get to walk away in one piece", "and those too cowardly or don't give up something important enough...", "receive a terrible curse", "What will I have to give up?", "Will I just get cursed anyway?", "Like some kind of sick joke"};
-	final String Option_Text_1 = "Should I just go back to the village or run away?";
-	final String[] Options_1 = {"Go to the spirit", "Go to the village", "Try to leave"};
+	//variables that are just the story text and options for player
+	final String[] Segment_1_Dialogue = {"Welcome to the Monster Slayer Adventure", "You are a mercenary hired to slay a werewolf", "You sharpened your silver swords and took off toward the beast's lair", "One mistake could cost you your life", "You recall it has excellent senses, deadly claws, and a fearsome bite", "The lair is a narrow and compact dark cave pretty deep in the forest", "There's also other wildlife you'd rather not have to deal with, especially during the pitch black of night", "You are currently following the main road in the midday sun", "You think it's highly likely the beast will remain for some time", "After walking for some time, you run into a merchant with a grin on his face", "He seems to not be in pain, but has some blood on his clothes", "You cannot see his hands either"};
+	final String Option_Text_1 = "What should you do?";
+	final String[] Options_1 = {"Walk up and greet him", "Keep your distance and move along", "Draw your steel sword"};
+	final String Options_1_Failed_Scenario_1 = "After carelessly approaching the sketchy merchant, he snuck attacked you with a small hand axe";
+	final String Options_1_Failed_Scenario_2 = "After trying to mind your own business, the sketchy merchant chased and killed you with a small hand axe";
+	final String[] Segment_2_Dialogue = {"After drawing your steel blade, the merchant tried to charge you with a small hand axe", "Fortunately, you reacted in time and sent your sword straight through his chest", "The man was likely a bandit, but he won't be hurting anyone else now", "You took what you could and proceeded towards your objective", "You arrived at the cave and pondered the best way to approach this", "You could always just head straight on, but you recall you still have some meat from lunch on you", "You could leave it out and hope it draws the werewolf out into an open and bright space", "The meat should have a strong enough scent, but you might invite more than just your prey", "You can also just rest till Night for the beast to make its way out"};
+	final String Option_Text_2 = "How do you wanna approach your prey?";
+	final String[] Options_2 = {"Set out the rest of your lunch as bait", "Wait till Nightfall", "Proceed in the cave"};
+	
+	
+	
+	
+	//important variables that are not the story
 	private int current_scene = 1;
 	private int iterator = 0;
 	private int picked_option = 1; //Should have a value of 1, 2, or 3 based on Options()
@@ -28,6 +40,23 @@ public class Story_Script
 			case 2:
 				Options(Option_Text_1, Options_1);
 				break;
+			case 3:
+				if(picked_option == 1)
+				{
+					Show_Failed_Option(Options_1_Failed_Scenario_1);
+				}
+				else if(picked_option == 2)
+				{
+					Show_Failed_Option(Options_1_Failed_Scenario_2);
+				}
+				else
+				{
+					Story(Segment_2_Dialogue);
+				}
+				break;
+			case 4:
+				//Implement Options 2
+				break;
 			default:
 				//The End Screen when implemented
 				break;
@@ -37,6 +66,8 @@ public class Story_Script
 	{
 		iterator = 0;
 		main_window.Show_Screen("NEXT_SCREEN");
+		main_window.Set_Next_Text(Story_Array[0]);
+		iterator++;
 		ActionListener Dialogue_Listener = new ActionListener()
 		{
 			@Override
@@ -62,12 +93,48 @@ public class Story_Script
 		main_window.Set_Option_Text(Option_Text);
 		main_window.Set_Option_Button_Names(Options_Array[0], Options_Array[1], Options_Array[2]);
 		main_window.Show_Screen("OPTIONS_SCREEN");
-		//Listener for main_window.First_Button
-		//Listener for main_window.Second_Button
-		//Listener for main_window.Third_Button
+		ActionListener listener = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				JButton clickedButton = (JButton) e.getSource();
+				main_window.First_Button.removeActionListener(this);
+				main_window.Second_Button.removeActionListener(this);
+				main_window.Third_Button.removeActionListener(this);
+				current_scene++;
+				if(clickedButton.getText().equals(Options_Array[0]))
+				{
+					picked_option = 1;
+				}
+				else if(clickedButton.getText().equals(Options_Array[1]))
+				{
+					picked_option = 2;
+				}
+				else
+				{
+					picked_option = 3;
+				}
+				Story_Engine();
+			}
+		};
+		main_window.First_Button.addActionListener(listener);
+		main_window.Second_Button.addActionListener(listener);
+		main_window.Third_Button.addActionListener(listener);
 	}
-	public void Show_Failed_Option()
+	public void Show_Failed_Option(String Failed_Text)
 	{
-	
+		main_window.Set_Next_Text(Failed_Text);
+		main_window.Show_Screen("NEXT_SCREEN");
+		ActionListener Dialogue_Listener = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+		};
+		main_window.Next_Button.setText("Game Over");
+		main_window.Next_Button.addActionListener(Dialogue_Listener);
 	}
 }
