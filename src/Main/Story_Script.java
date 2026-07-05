@@ -15,8 +15,11 @@ public class Story_Script
 	final String[] Segment_2_Dialogue = {"After drawing your steel blade, the merchant tried to charge you with a small hand axe", "Fortunately, you reacted in time and sent your sword straight through his chest", "The man was likely a bandit, but he won't be hurting anyone else now", "You took what you could and proceeded towards your objective", "You arrived at the cave and pondered the best way to approach this", "You could always just head straight on, but you recall you still have some meat from lunch on you", "You could leave it out and hope it draws the werewolf out into an open and bright space", "The meat should have a strong enough scent, but you might invite more than just your prey", "You can also just rest till Night for the beast to make its way out"};
 	final String Option_Text_2 = "How do you wanna approach your prey?";
 	final String[] Options_2 = {"Set out the rest of your lunch as bait", "Wait till Nightfall", "Proceed in the cave"};
-	
-	
+	final String Options_2_Failed_Scenario_1 = "The bait you laid out ended up attracting a pack of wolves who quickly surrounded and overwhelmed you";
+	final String Options_2_Failed_Scenario_2 = "You waited for nightfall and made the unfortunate realization you will be in a pitch black forest and not have the advantage against your approaching opponent";
+	final String[] Segment_3_Dialogue = {"You decided the best option was to get the drop on your prey in its own lair", "The cave is quite narrow and you doubt you will be able to use any large weapons in here", "The conditions are not ideal, but your contract is still doable", "Contrary to popular belief werewolves do not need it to be night to transform", "Even at rest, you think it's highly probable it's still in its beast form ready to pounce at the slightest misstep", "After proceeding further in, you spot the beast", "Black fur, very wolf-like, about the size of a small bear", "and most important of all, it is sleeping", "You could try to kill it stealthly with your silver dagger", "You could also charge it using one of your silver swords"};
+	final String Option_Text_3 = "How should you proceed?";
+	final String[] Options_3 = {"Charge with short silver sword", "Charge with long silver sword", "Creep up on it with a silver dagger"};
 	
 	
 	//important variables that are not the story
@@ -55,7 +58,24 @@ public class Story_Script
 				}
 				break;
 			case 4:
-				//Implement Options 2
+				Options(Option_Text_2, Options_2);
+				break;
+			case 5:
+				if(picked_option == 1)
+				{
+					Show_Failed_Option(Options_2_Failed_Scenario_1);
+				}
+				else if(picked_option == 2)
+				{
+					Show_Failed_Option(Options_2_Failed_Scenario_2);
+				}
+				else
+				{
+					Story(Segment_3_Dialogue);
+				}
+				break;
+			case 6:
+				Options(Option_Text_3, Options_3);
 				break;
 			default:
 				//The End Screen when implemented
