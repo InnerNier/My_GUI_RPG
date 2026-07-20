@@ -20,7 +20,10 @@ public class Story_Script
 	final String[] Segment_3_Dialogue = {"You decided the best option was to get the drop on your prey in its own lair", "The cave is quite narrow and you doubt you will be able to use any large weapons in here", "The conditions are not ideal, but your contract is still doable", "Contrary to popular belief werewolves do not need it to be night to transform", "Even at rest, you think it's highly probable it's still in its beast form ready to pounce at the slightest misstep", "After proceeding further in, you spot the beast", "Black fur, very wolf-like, about the size of a small bear", "and most important of all, it is sleeping", "You could try to kill it stealthly with your silver dagger", "You could also charge it using one of your silver swords"};
 	final String Option_Text_3 = "How should you proceed?";
 	final String[] Options_3 = {"Charge with short silver sword", "Charge with long silver sword", "Creep up on it with a silver dagger"};
-	
+	final String Options_3_Failed_Scenario_1 = "Attempting to attack with a long silver sword caused you strike the cave wall by accident giving the werewolf the opportunity to end you";
+	final String Options_3_Failed_Scenario_2 = "You failed to sneak up on the beast and the silver dagger did not cut deep enough, the werewolf quickly slices you apart moments later";
+	final String[] Final_Segment = {"You decided to use a short silver sword", "The werewolf quickly reacts to you", "Due to the blade's short length, you can fight without worry about hitting the cave walls", "You nimbly dodge its sharp claws and deadly bite, giving the beast some bad wounds in the process", "Finally you execute it with a last stab to the chest", "You cut off its head as proof of your hunt and return to your client", "The villager seems pleased and gives you your reward"}; 
+	final String Thank_You_Message = "Thanks for Playing!";
 	
 	//important variables that are not the story
 	private int current_scene = 1;
@@ -77,8 +80,24 @@ public class Story_Script
 			case 6:
 				Options(Option_Text_3, Options_3);
 				break;
+			case 7:
+				if(picked_option == 2)
+				{
+					Show_Failed_Option(Options_3_Failed_Scenario_1);
+				}
+				if(picked_option == 3)
+				{
+					Show_Failed_Option(Options_3_Failed_Scenario_2);
+				}
+				else
+				{
+					Story(Final_Segment);
+				}
+				break;
+			case 8:
+				Show_Failed_Option(Thank_You_Message);
+				break;
 			default:
-				//The End Screen when implemented
 				break;
 		}
 	}
